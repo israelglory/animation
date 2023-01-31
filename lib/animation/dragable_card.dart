@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class ThreeDimensionalCard extends StatefulWidget {
   const ThreeDimensionalCard({Key? key}) : super(key: key);
@@ -29,10 +30,10 @@ class _ThreeDimensionalCardState extends State<ThreeDimensionalCard> {
                 width: width,
                 decoration: BoxDecoration(
                   gradient: const SweepGradient(colors: [
-                    Colors.cyanAccent,
-                    Colors.pinkAccent,
-                    Colors.yellowAccent,
-                    Colors.cyanAccent
+                    Colors.blue,
+                    Colors.white,
+                    Colors.purple,
+                    Colors.lime,
                   ]),
                   borderRadius: BorderRadius.circular(20),
                 ),
@@ -43,8 +44,8 @@ class _ThreeDimensionalCardState extends State<ThreeDimensionalCard> {
               child: Transform(
                 transform: Matrix4.identity()
                   ..setEntry(3, 2, 0.002) // perspective
-                  ..rotateX(0.001 * location.dy)
-                  ..rotateY(-0.001 * location.dx),
+                  ..rotateX(0.01 * location.dy)
+                  ..rotateY(0.01 * location.dx),
                 alignment: FractionalOffset.center,
                 child: GestureDetector(
                   onPanUpdate: (details) {
@@ -59,48 +60,102 @@ class _ThreeDimensionalCardState extends State<ThreeDimensionalCard> {
                     height: cardHeight,
                     width: cardWidth,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: Colors.black,
+                      borderRadius: BorderRadius.circular(
+                        20.0,
+                      ),
+                      image: const DecorationImage(
+                        image: AssetImage("assets/images/cardbg.png"),
+                        fit: BoxFit.cover,
+                      ),
                     ),
-                    padding: const EdgeInsets.only(left: 20, bottom: 20),
-                    child: Align(
-                      alignment: Alignment.bottomLeft,
-                      child: Row(
-                        children: [
-                          Container(
-                            height: 50,
-                            width: 50,
-                            decoration: BoxDecoration(
-                              color: Colors.grey.shade800,
-                              shape: BoxShape.circle,
-                            ),
+                    child: Stack(
+                      children: [
+                        Positioned(
+                          bottom: 64.0,
+                          top: 0.0,
+                          right: 54.0,
+                          left: 15.0,
+                          child: Image.asset(
+                            "assets/images/cardbgworld.png",
                           ),
-                          const SizedBox(width: 10),
-                          Column(
+                        ),
+                        //Card name, number and exp. date
+                        Positioned(
+                          left: 30.0,
+                          top: 30.0,
+                          bottom: 30.0,
+                          child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Container(
-                                height: 20,
-                                width: 80 * 2,
-                                decoration: BoxDecoration(
-                                  color: Colors.grey.shade800,
-                                  borderRadius: BorderRadius.circular(20),
+                              const Text(
+                                'Glory Olaifa Israel',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w400,
                                 ),
                               ),
-                              const SizedBox(height: 8),
-                              Container(
-                                height: 20,
-                                width: 80,
-                                decoration: BoxDecoration(
-                                  color: Colors.grey.shade800,
-                                  borderRadius: BorderRadius.circular(20),
+                              Image.asset(
+                                "assets/icons/cardsim.png",
+                                height: 48,
+                                width: 55,
+                              ),
+                              const Text(
+                                '35-070-0003-3256-2022',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              const Text(
+                                'Exp. 12/26',
+                                style: TextStyle(
+                                  fontSize: 13,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500,
                                 ),
                               ),
                             ],
                           ),
-                        ],
-                      ),
+                        ),
+                        //Card mastercard
+                        Positioned(
+                          //top: 0.0,
+                          right: 30.0,
+                          bottom: 30.0,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SvgPicture.asset(
+                                "assets/icons/mastercard.svg",
+                                height: 30,
+                                width: 30,
+                              ),
+                              const Text(
+                                'MasterCard',
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        //Card  logo
+                        Positioned(
+                          top: 30.0,
+                          right: 30.0,
+                          child: SvgPicture.asset(
+                            "assets/images/cardLogo.svg",
+                            height: 30,
+                            width: 30,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
