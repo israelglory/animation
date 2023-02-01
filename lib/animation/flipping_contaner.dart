@@ -8,7 +8,7 @@ class FlippingContainer extends StatefulWidget {
 }
 
 class _FlippingContainerState extends State<FlippingContainer>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
 
@@ -18,6 +18,9 @@ class _FlippingContainerState extends State<FlippingContainer>
       vsync: this,
       duration: const Duration(seconds: 2),
     );
+    _animation =
+        AnimationController(vsync: this, duration: Duration(seconds: 2));
+    //_animation = Tween<double>(begin: 0, end: 360).animate(_controller);
     _animation = Tween<double>(begin: 0, end: 360).animate(_controller);
     _controller.repeat();
     super.initState();
@@ -38,7 +41,7 @@ class _FlippingContainerState extends State<FlippingContainer>
         builder: (context, _) {
           return Transform(
             alignment: Alignment.center,
-            transform: Matrix4.identity()..rotateX(_animation.value),
+            transform: Matrix4.identity()..rotateZ(_animation.value),
             child: GestureDetector(
               onLongPress: () {
                 _controller.reverse();

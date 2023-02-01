@@ -43,7 +43,7 @@ class _ThreeDimensionalCardState extends State<ThreeDimensionalCard> {
               alignment: Alignment.center,
               child: Transform(
                 transform: Matrix4.identity()
-                  ..setEntry(3, 2, 0.002) // perspective
+                  ..setEntry(3, 2, 0.002) // perspective of the child.
                   ..rotateX(0.01 * location.dy)
                   ..rotateY(0.01 * location.dx),
                 alignment: FractionalOffset.center,
